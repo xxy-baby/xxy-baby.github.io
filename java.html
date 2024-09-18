@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Gallery Example</title>
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .main-image-container {
+    position: relative;
+    width: 80%;
+    max-width: 600px; /* Adjust the max-width as needed */
+    margin-bottom: 20px;
+  }
+  
+  .main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: filter 0.3s ease;
+  }
+  
+  .thumbnails {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .thumbnail {
+    cursor: pointer;
+    width: 100px; /* Set thumbnail width */
+    height: auto;
+  }
+
+  .toggle-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<h1 class="gallery-title">Image gallery example</h1>
+
+<div class="main-image-container">
+  <button class="toggle-button" id="toggleButton">Toggle Brightness</button>
+  <img src="D:\web-project\图片1.jpg" alt="Main Image" class="main-image" id="mainImage">
+</div>
+
+<ul class="thumbnails" id="thumbnailsList">
+  <li><img src="D:\web-project\图片1.jpg" alt="Thumbnail 1" class="thumbnail" data-full-size="D:\web-project\图片1.jpg"></li>
+  <li><img src="D:\web-project\图片2.jpg" alt="Thumbnail 1" class="thumbnail" data-full-size="D:\web-project\图片2.jpg"></li>
+  <li><img src="D:\web-project\图片3.jpg" alt="Thumbnail 2" class="thumbnail" data-full-size="D:\web-project\图片3.jpg"></li>
+  <li><img src="D:\web-project\图片4.jpg" alt="Thumbnail 3" class="thumbnail" data-full-size="D:\web-project\图片4.jpg"></li>
+  <li><img src="D:\web-project\图片5.jpg" alt="Thumbnail 4" class="thumbnail" data-full-size="D:\web-project\图片5.jpg"></li>
+  </ul>
+
+<script>
+  const mainImage = document.getElementById('mainImage');
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  const toggleButton = document.getElementById('toggleButton');
+  let isDarkened = false;
+
+  // Function to update the main image when a thumbnail is clicked
+  function updateMainImage(event) {
+    const fullSizeUrl = event.target.getAttribute('data-full-size');
+    mainImage.src = fullSizeUrl;
+  }
+
+  // Event listeners for each thumbnail click
+  thumbnails.forEach(thumbnail => {
+    thumbnail.addEventListener('click', updateMainImage);
+  });
+
+ // Darken/Lighten functionality
+function toggleBrightness() {
+  var mainImage = document.getElementById('mainImage');
+  if (isDarkened) {
+    mainImage.style.filter = 'brightness(1)'; // 恢复原亮度
+  } else {
+    mainImage.style.filter = 'brightness(0.5)'; // 变暗
+  }
+  isDarkened = !isDarkened; // 切换isDarkened的值
+}
+
+// Event listener for the toggle button
+toggleButton.addEventListener('click', toggleBrightness);
+</script>
+
+</body>
+</html>
